@@ -1,0 +1,260 @@
+package buben;
+
+import java.awt.Color;
+
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import java.awt.Polygon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import java.awt.geom.Rectangle2D;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+
+public class MyFrame extends JFrame{
+
+	float x0, y0, x, y, width, high;	
+	
+	float m=4;
+	float n = 4;
+	
+	float h, b;
+	
+     int x2, x3, x4, x5, x6;
+    int  y2 ,y3, y4, y5, y6;
+	
+    int x1 = getPlaceX();
+    int y1 = getPlaceY();
+    
+    JPanel panel = new JPanel();
+	
+	public MyFrame()
+	{
+		super("the window");
+		
+		setBounds(300,100,1000,900);
+		
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		createButtons();
+		
+	}
+	
+	
+		public void createButtons()
+		{
+			
+			
+			JLabel label = new JLabel("Метка со значком и с надписью", SwingConstants.RIGHT);
+			panel.add(label);
+		
+			
+			panel.setLayout(null);
+			
+			JButton button1 = new JButton("Up");
+			button1.setSize(50, 40);
+			button1.setLocation(700,100);
+			panel.add(button1);
+					
+			
+			JButton button2 = new JButton("Down");
+			button2.setSize(70, 40);
+			button2.setLocation(690,150);
+			panel.add(button2);
+			
+			JButton button3 = new JButton("Left");
+			button3.setSize(70, 40);
+			button3.setLocation(610,150);
+			panel.add(button3);
+			
+			JButton button4 = new JButton("Right");
+			button4.setSize(70, 40);
+			button4.setLocation(770,150);
+			panel.add(button4);
+			
+		
+			
+			setContentPane(panel);
+			
+			
+			
+			
+			button1.addActionListener(new ActionListener() {
+	               public void actionPerformed(ActionEvent e) {
+	            	y1 = y1 - 100;
+	           
+	            
+	            	 repaint();
+	            	
+	            	
+	               }
+	               
+			});
+			
+			button2.addActionListener(new ActionListener() {
+	               public void actionPerformed(ActionEvent e) {
+	            	y1 = y1 + 100;
+	            	
+	            	 repaint();
+	            	
+	               }
+			});
+			
+			button3.addActionListener(new ActionListener() {
+	               public void actionPerformed(ActionEvent e) {
+	            	x1 = x1 - 100;
+	            	
+	            	
+	            	repaint();
+	            	
+	               }
+			});
+			
+			button4.addActionListener(new ActionListener() {
+	               public void actionPerformed(ActionEvent e) {
+	            	   
+	            	x1 = x1 + 100;
+	            	
+	            	 repaint();
+			
+	               }
+			});
+			
+		}
+		
+	
+		
+	       public void paint(Graphics g) {
+	    	   super.paint(g);
+	                Graphics2D g2 = (Graphics2D) g;
+	                
+	                // Hexogon
+	       
+	               
+	                g2.setColor(Color.BLACK);
+	                
+	                
+	            
+	                
+	              //  x1 = getPlaceX();
+	                	
+	                
+		                x2 = x1 + 50;
+		                x3 = x2 + 100; 
+		                x4 = x3 + 50;
+		                x5 = x4 - 50;
+		                x6 = x5 - 100;
+		                
+	              //  y1 = getPlaceY();
+	                
+	                	y2 = y1 + 87;
+	                	y3 = y2;
+	                	y4 = y3 - 87;
+	                	y5 = y4 - 87; 
+	                	y6 = y5;
+	                
+	                int[] arrayX = {x1, x2, x3, x4, x5, x6};
+	                int[] arrayY = {y1, y2, y3, y4, y5, y6};
+	                
+	                Polygon hex = new Polygon(arrayX, arrayY, 6);
+	                
+	           
+	                g2.drawPolygon(hex);
+	               
+	                
+	             
+	                
+	     
+	                // Rectangles
+	                
+	                g2.setColor(Color.red);
+	                
+	                x0=100;
+	                y0=300;
+	                width = 500;
+	                high = 500;
+	                
+	                x = x0;
+	                y = y0;
+	                
+	                g2.draw(new Rectangle2D.Float(x0, y0, width, high));
+	                
+	                b = width/m;
+	                h = high/n;
+	                
+	                
+	           
+	                for (int k = 0; k<m; k++)
+	                {
+	                	for(int j =0; j<n; j++)
+	                	{
+	                		g2.setColor(Color.blue);
+	                		g2.draw(new Rectangle2D.Float(x, y, b, h));
+	                		
+	                			if(hex.intersects(x, y, b, h)) 
+	                			{
+	                				Color red = new Color(255,0,43,100);
+	                				g2.setColor(red);
+	                				g2.fill(new Rectangle2D.Float(x, y, b, h));
+	                			}
+	                			y = y + h;
+	                	}
+	                	y = y0;
+            			x = x + b;
+	                	
+	                };
+	                
+	                g2.setColor(Color.gray);
+	                g2.fill(hex);
+	                
+	                g2.draw(new Rectangle2D.Float(x0, y0, width, high));
+	         
+	          
+	          
+	                
+		}
+	       
+	   	/*
+			public class MyListener implements ActionListener {
+				
+				@Override
+				
+				public void actionPerformed(ActionEvent event)
+				{
+					if (event.getActionCommand().equals("Up"))
+					{
+						panel.removeAll();
+						x1 = x1 +100;
+						repaint();
+					}
+				}
+			}
+	*/
+
+	       public int getPlaceX()
+	       {
+	    	   
+	    	x1 = 300;
+	    	
+	    	   return x1;
+	    	   
+	       }
+	      
+	       public int getPlaceY()
+	       {
+	    	   y1 = 500;
+	    	   
+	    	   return y1;
+	       }
+	       
+	
+	
+
+}
