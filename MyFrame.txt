@@ -1,4 +1,4 @@
-package buben;
+package somepackage;
 
 import java.awt.Color;
 
@@ -52,7 +52,7 @@ public class MyFrame extends JFrame{
 		{
 			
 			
-			JLabel label = new JLabel("Метка со значком и с надписью", SwingConstants.RIGHT);
+			JLabel label = new JLabel("ГЊГҐГІГЄГ  Г±Г® Г§Г­Г Г·ГЄГ®Г¬ ГЁ Г± Г­Г Г¤ГЇГЁГ±ГјГѕ", SwingConstants.RIGHT);
 			panel.add(label);
 		
 			
